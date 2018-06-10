@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Varna Vincent">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="/css/custom.css" rel="stylesheet">
+    <title>Share Books</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body class="text-center">
+
+
+
+<div class="container-fluid">
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 box-shadow">
+        <h5 class="my-0 mr-md-auto font-weight-normal text-light logo"><a href="/home">Share Books</a></h5>
+        <nav class="navbar-expand-lg my-2 my-md-0 mr-md-3">
+            <a class="btn btn-outline-customlight" href="/about">About Us</a>
+            <a class="btn btn-outline-customlight" href="/books/">Explore</a>
+            <a class="btn btn-outline-customlight" href="/books/addBook">Add Book</a>
+            <a class="btn btn-outline-primary" href="/login">Sign up / Login</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <form class="m-3 p-3" method="post" action="/books/add">
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="name">Book Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="eg. Harry Potter" pattern="^[a-zA-Z\s]*$" required>
+            </div>
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="year">Year</label>
+                <input type="number" class="form-control" id="year" name="year" placeholder="eg. 2016" pattern="^[0-9]{4}$" required>
+            </div>
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="bookCondition">Condition</label>
+                <select class="form-control" id="bookCondition" name="bookCondition">
+                    <option value="new">New</option>
+                    <option value="like-new">Looks New</option>
+                    <option value="worn-out">Worn Out</option>
+                    <option value="torn">Torn</option>
+                    <option value="pages-missing">Pages Missing</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="originalPrice">Original Price</label>
+                <input type="number" class="form-control" id="originalPrice" name="originalPrice" placeholder="eg. 100" required>
+            </div>
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="rentalPrice">Price for Rent</label>
+                <input type="number" class="form-control" id="rentalPrice" name="rentalPrice" placeholder="eg. 20" required>
+            </div>
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="notes">Notes</label>
+                <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="d-flex align-self-start" for="image">Image</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
