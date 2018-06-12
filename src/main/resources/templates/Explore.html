@@ -16,25 +16,23 @@
 
 <body class="text-center">
 
-
-
 <div class="container-fluid">
 
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal text-light logo"><a href="/home">Share Books</a></h5>
-        <nav class="navbar-expand-lg my-2 my-md-0 mr-md-3">
-            <a class="btn btn-outline-customlight" href="/about">About Us</a>
-            <a class="btn btn-outline-customlight" href="/books/">Explore</a>
-            <a class="btn btn-outline-customlight" href="/books/addBook">Add Book</a>
-            <a class="btn btn-outline-primary" href="/login">Sign up / Login</a>
-        </nav>
-    </div>
+    <div th:include="/layouts/header :: nav"></div>
 
     <div class="container">
-        <div th:each="book : ${books}">
-            <div th:text="${book.name}">Onions</div>
-            <div th:text="${book.rentalPrice}">2.41</div>
-            <div th:text="${book.status}">yes</div>
+        <div class="card-columns p-3 m-3">
+            <div class="card text-center" th:each="book : ${books}">
+                <img th:if="${book.image} != null" class="card-img-top" th:src="@{'data:image/jpeg;base64,' + ${book.image} }" alt="#{book.name}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${book.name}">Card title</h5>
+                    <h6 class="text-muted" th:text="'$' + ${book.rentalPrice}"></h6>
+                    <h6 class="text-muted" th:text="'Condition: ' + ${book.bookCondition}"></h6>
+                    <h6 class="text-muted" th:text="'Owned By: ' + ${book.user.name}"></h6>
+                    <h6 class="text-muted"><small class="text-muted"  th:text="'Notes: ' + ${book.notes}"></small></h6>
+                    <button class="btn btn-outline-primary btn-sm mb-1"><i class="fas fa-book"></i> Borrow</button>
+                </div>
+            </div>
         </div>
     </div>
 

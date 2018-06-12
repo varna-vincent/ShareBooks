@@ -1,5 +1,6 @@
 package com.sharebooks.book;
 
+import com.sharebooks.user.User;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -11,14 +12,15 @@ public class Book {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private Integer userId;
+    @OneToOne
+    private User user;
     private String name;
     private Integer yearBought;
     private String bookCondition;
     private Double originalPrice;
     private Double rentalPrice;
     private String notes;
-    private byte[] image;
+    private String image;
     private DateTime borrowedDateFrom;
     private DateTime borrowedDateTo;
     private String status;
@@ -31,12 +33,12 @@ public class Book {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -87,11 +89,11 @@ public class Book {
         this.notes = notes;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

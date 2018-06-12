@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="nav">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 box-shadow">
+        <h5 class="my-0 mr-md-auto font-weight-normal text-light logo"><a href="/home">Share Books</a></h5>
+        <nav class="navbar-expand-lg my-2 my-md-0 mr-md-3">
+            <a class="btn btn-outline-customlight" href="/about">About Us</a>
+            <a class="btn btn-outline-customlight" href="/books/">Explore</a>
+            <a class="btn btn-outline-customlight" href="/books/addBook">Add Book</a>
+            <a class="btn btn-outline-primary" href="/login">Sign up / Login</a>
+        </nav>
+    </div>
+</div>
+
+</body>
+
+</html>
