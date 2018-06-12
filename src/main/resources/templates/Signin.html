@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Varna Vincent">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="/css/custom.css" rel="stylesheet">
+    <title>Share Books</title>
 
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body class="text-center">
+
+<div class="container-fluid">
+
+    <div th:include="/layouts/header :: nav"></div>
+
+    <div class="container d-flex p-2">
+        <div class="d-flex w-75 p-4 flex-column">
+            <div class="text-left">
+                <h2 class="py-3">Sign Up</h2>
+                <form id="signupForm" method="POST" action="/users/register">
+                    <div class="form-group">
+                        <label for="name"><b>Name</b></label>
+                        <input id="name" type="text" placeholder="Enter name" class="form-control" pattern="^[a-zA-Z\s]*$" name="name" value=""  required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register_email"><b>E-Mail Address</b></label>
+                        <input id="register_email" type="email" class="form-control" name="email" value="" placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><b>Password</b></label>
+                        <input id="password" type="password" class="form-control"  placeholder="Enter password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" autocomplete="off" required>
+                        <small id="passwordHelp" class="form-text text-muted">Password must contain atleast 8 characters, 1 upper, 1 lower, 1 number and 1 special character limited to @$!%?&</small>
+                    </div>
+                    <div class="form-group" >
+                        <input type="submit" value="Register" class="btn btn-outline-primary"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <span class="border border-light"></span>
+        <div class="d-flex w-75 flex-column p-4">
+            <div class="text-left">
+                <h2 class="py-3">Login</h2>
+                <form id="signinForm" method="POST" action="/users/login">
+                    <div class="form-group">
+                        <label for="email"><b>Email: </b></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd"><b>Password:</b></label>
+                        <input type="password" class="form-control" id="pwd" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" placeholder="Enter password" required="">
+                    </div>
+                    <div>
+                        <input type="submit" value="Login" class="btn btn-outline-primary"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
