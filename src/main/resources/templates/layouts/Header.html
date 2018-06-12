@@ -10,8 +10,19 @@
         <nav class="navbar-expand-lg my-2 my-md-0 mr-md-3">
             <a class="btn btn-outline-customlight" href="/books/">Explore</a>
             <a class="btn btn-outline-customlight" href="/about">About Us</a>
-            <a class="btn btn-outline-customlight" href="/books/addBook">Add Book</a>
-            <a class="btn btn-outline-primary" href="/users/signin">Sign up / Login</a>
+            <a class="btn btn-outline-primary" th:if="${user} == null" href="/users/signin">Sign up / Login</a>
+            <a class="btn btn-outline-customlight" th:if="${user} != null" href="/books/addBook">Add Book</a>
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" th:if="${user} != null" th:text="${user.name}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </button>
+            <div class="dropdown-menu" th:if="${user} != null">
+                <a class="dropdown-item" href="/books/addBook">Add Book</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/books/borrowed">Borrow History</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" name="logout-form" action="/users/logout" method="POST" style="display: none;">
+                </form>
+            </div>
         </nav>
     </div>
 </div>
