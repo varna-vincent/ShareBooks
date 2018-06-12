@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller    // This means that this class is a Controller
@@ -17,17 +18,19 @@ public class BookController {
     private BookRepository bookRepository;
 
     @GetMapping(path="/addBook")
-    public String addBook() {
+    public String addBook(HttpServletRequest request, Model model) {
         // This returns a JSON or XML with the users
+        model.addAttribute("user", request.getSession().getAttribute("user"));
         return "addbook";
     }
 
     @GetMapping(path="/")
-    public String getAllBooks(Model model) {
+    public String getAllBooks(HttpServletRequest request, Model model) {
         // This returns a JSON or XML with the users
         System.out.println(bookRepository);
         Iterable<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
+        model.addAttribute("user", request.getSession().getAttribute("user"));
         return "explore";
     }
 

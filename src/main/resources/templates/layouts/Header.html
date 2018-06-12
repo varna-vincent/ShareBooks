@@ -11,7 +11,6 @@
             <a class="btn btn-outline-customlight" href="/books/">Explore</a>
             <a class="btn btn-outline-customlight" href="/about">About Us</a>
             <a class="btn btn-outline-primary" th:if="${user} == null" href="/users/signin">Sign up / Login</a>
-            <a class="btn btn-outline-customlight" th:if="${user} != null" href="/books/addBook">Add Book</a>
             <button type="button" class="btn btn-outline-primary dropdown-toggle" th:if="${user} != null" th:text="${user.name}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             </button>
             <div class="dropdown-menu" th:if="${user} != null">

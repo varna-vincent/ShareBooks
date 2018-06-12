@@ -80,7 +80,7 @@ public class UserController {
         return "signin";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("user");
         request.getSession().invalidate();
