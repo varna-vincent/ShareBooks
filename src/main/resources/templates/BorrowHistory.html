@@ -16,26 +16,33 @@
 
 <body class="text-center">
 
+
+
 <div class="container-fluid">
 
     <div th:include="/layouts/header :: nav"></div>
 
-    <div class="container">
-        <div class="card-columns p-3 m-3">
-            <div class="card text-center" th:each="book : ${books}">
-                <img th:if="${book.image} != null and ${book.image} != ''" class="card-img-top" th:src="@{'data:image/jpeg;base64,' + ${book.image} }">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${book.name}">Card title</h5>
-                    <h6 class="text-muted"><small  th:text="'Original Price: $' + ${book.originalPrice}"></small></h6>
-                    <h6 class="text-muted" th:text="'Rent: $' + ${book.rentalPrice}"></h6>
-                    <h6 class="text-muted" th:text="'Condition: ' + ${book.bookCondition}"></h6>
-                    <h6 class="text-muted" th:text="'Owned By: ' + ${book.user.name}"></h6>
-                    <h6 class="text-muted"><small class="text-muted"  th:text="'Notes: ' + ${book.notes}"></small></h6>
-                    <a th:href="@{'/books/borrow/' + ${book.id}}"><button class="btn btn-outline-primary btn-sm mb-1" th:if="${user} != null" ><i class="fas fa-book"></i> Borrow</button></a>
+    <div class="container d-flex p-3 justify-content-center">
+        <div class="d-flex w-75 pt-4 flex-column">
+            <div class="text-center">
+                <h1 class="pb-2">My Borrow History</h1>
+                <div class="d-flex flex-column">
+                    <div class="media" th:each="borrowTransaction : ${borrowTransactions}">
+                        <img class="mr-3 w-25 h-25 img-thumbnail" th:src="@{'data:image/jpeg;base64,' + ${borrowTransaction.book.image} }" alt="No image found">
+                        <div class="media-body">
+                            <h5 class="mt-0"  th:text="${borrowTransaction.book.name}"></h5>
+                            <h6 class="text-muted"><small  th:text="'Original Price: $' + ${borrowTransaction.book.originalPrice}"></small></h6>
+                            <h6 class="text-muted" th:text="'Rent: $' + ${borrowTransaction.price}"></h6>
+                            <h6 class="text-muted" th:text="'Owned By: ' + ${borrowTransaction.lender.name}"></h6>
+                            <h6 class="text-muted" th:text="'Borrowed On: ' + ${borrowTransaction.borrowedDateFrom}"></h6>
+                            <h6 class="text-muted" th:text="'Borrowed Till: ' + ${borrowTransaction.borrowedDateTo}"></h6>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 </div>
 

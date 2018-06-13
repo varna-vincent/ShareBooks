@@ -16,25 +16,40 @@
 
 <body class="text-center">
 
+
+
 <div class="container-fluid">
 
     <div th:include="/layouts/header :: nav"></div>
 
     <div class="container">
-        <div class="card-columns p-3 m-3">
-            <div class="card text-center" th:each="book : ${books}">
-                <img th:if="${book.image} != null and ${book.image} != ''" class="card-img-top" th:src="@{'data:image/jpeg;base64,' + ${book.image} }">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${book.name}">Card title</h5>
+        <div class="d-flex flex-column mt-3 text-center">
+            <h1 class="pb-2">Borrow a Book</h1>
+        </div>
+        <form class="m-3 p-3" method="post" action="/borrow">
+            <div class="media">
+                <img th:if="${book.image} != null and ${book.image} != ''" class="mr-3 w-25 h-25 img-thumbnail" th:src="@{'data:image/jpeg;base64,' + ${book.image} }">
+                <div class="media-body">
+                    <h5 class="mt-0" th:text="${book.name}"></h5>
                     <h6 class="text-muted"><small  th:text="'Original Price: $' + ${book.originalPrice}"></small></h6>
                     <h6 class="text-muted" th:text="'Rent: $' + ${book.rentalPrice}"></h6>
                     <h6 class="text-muted" th:text="'Condition: ' + ${book.bookCondition}"></h6>
                     <h6 class="text-muted" th:text="'Owned By: ' + ${book.user.name}"></h6>
                     <h6 class="text-muted"><small class="text-muted"  th:text="'Notes: ' + ${book.notes}"></small></h6>
-                    <a th:href="@{'/books/borrow/' + ${book.id}}"><button class="btn btn-outline-primary btn-sm mb-1" th:if="${user} != null" ><i class="fas fa-book"></i> Borrow</button></a>
                 </div>
             </div>
-        </div>
+            <input type="hidden" name="bookId" th:value="${book.id}"/>
+            <input type="hidden" name="userId" th:value="${book.user.id}"/>
+            <input type="hidden" name="price" th:value="${book.rentalPrice}"/>
+            <div class="form-group input-group input-daterange">
+                <input type="text" class="form-control" name="borrowedDateFrom" value="2012-04-05" required>
+                <div class="input-group-addon p-2"> to </div>
+                <input type="text" class="form-control" name="borrowedDateTo" value="2012-04-19" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+            </div>
+        </form>
     </div>
 
 </div>
@@ -45,5 +60,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/custom.js"/>
 </body>
 </html>

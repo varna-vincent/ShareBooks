@@ -23,6 +23,9 @@
     <div th:include="/layouts/header :: nav"></div>
 
     <div class="container">
+        <div class="d-flex flex-column mt-3 text-center">
+            <h1 class="pb-2">Add book</h1>
+        </div>
         <form class="m-3 p-3" method="post" action="/books/add" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="d-flex align-self-start" for="name">Book Name</label>

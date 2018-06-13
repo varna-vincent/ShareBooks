@@ -4,6 +4,7 @@ import com.sharebooks.user.User;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "books")
@@ -11,7 +12,7 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @OneToOne
     private User user;
     private String name;
@@ -21,15 +22,15 @@ public class Book {
     private Double rentalPrice;
     private String notes;
     private String image;
-    private DateTime borrowedDateFrom;
-    private DateTime borrowedDateTo;
+    private Date borrowedDateFrom;
+    private Date borrowedDateTo;
     private String status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,19 +98,19 @@ public class Book {
         this.image = image;
     }
 
-    public DateTime getBorrowedDateFrom() {
+    public Date getBorrowedDateFrom() {
         return borrowedDateFrom;
     }
 
-    public void setBorrowedDateFrom(DateTime borrowedDateFrom) {
+    public void setBorrowedDateFrom(Date borrowedDateFrom) {
         this.borrowedDateFrom = borrowedDateFrom;
     }
 
-    public DateTime getBorrowedDateTo() {
+    public Date getBorrowedDateTo() {
         return borrowedDateTo;
     }
 
-    public void setBorrowedDateTo(DateTime borrowedDateTo) {
+    public void setBorrowedDateTo(Date borrowedDateTo) {
         this.borrowedDateTo = borrowedDateTo;
     }
 
