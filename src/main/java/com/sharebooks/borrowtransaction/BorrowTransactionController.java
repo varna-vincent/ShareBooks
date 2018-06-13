@@ -55,7 +55,7 @@ public class BorrowTransactionController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "borrowhistory";
+        return "redirect:/borrowhistory";
     }
 
     @GetMapping("/borrowhistory")

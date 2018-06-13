@@ -37,10 +37,10 @@ public class BookController {
     }
 
     @GetMapping(path="/")
-    public String getAllBooks(HttpServletRequest request, Model model) {
+    public String getAllAvailableBooks(HttpServletRequest request, Model model) {
         // This returns a JSON or XML with the users
         System.out.println(bookRepository);
-        Iterable<Book> books = bookRepository.findAll();
+        Iterable<Book> books = bookRepository.findByStatus("Available");
         model.addAttribute("books", books);
         model.addAttribute("user", request.getSession().getAttribute("user"));
         return "explore";
@@ -69,7 +69,7 @@ public class BookController {
             e.printStackTrace();
         }
 
-        return "explore";
+        return "redirect:/explore";
     }
 
     @RequestMapping(value="/borrow/{id}")

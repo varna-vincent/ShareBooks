@@ -17,4 +17,7 @@ public interface BookRepository  extends CrudRepository<Book, Long> {
 
     @Nullable
     List<Book> findByUser(User user);
+
+    @Nullable
+    List<Book> findByStatus(String status);
 }

@@ -26,7 +26,7 @@ public class UserController {
             user.setPassword(password);
             user = userRepository.save(user);
 
-            return attemptLogin(request, user, password) ? "dashboard" : "signin";
+            return attemptLogin(request, user, password) ? "redirect:/dashboard" : "signin";
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -54,12 +54,11 @@ public class UserController {
                 model.addAttribute("errormsg", "User does not exist");
                 return "signin";
             } else if(attemptLogin(request, user, password)) {
-                return "dashboard";
+                return "redirect:/dashboard";
             } else {
                 model.addAttribute("errormsg", "Credentials do not match");
                 return "signin";
             }
-//            return (user != null && attemptLogin(request, user, password)) ? new RedirectView("dashboard") : new RedirectView("signin");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             model.addAttribute("errormsg", "Server error: Invalid request");
