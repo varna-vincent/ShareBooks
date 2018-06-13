@@ -22,7 +22,18 @@
 
     <div th:include="/layouts/header :: nav"></div>
 
-    <p th:text="'Welcome ' + ${user.name}">Welcome </p>
+    <div class="container d-flex p-3 justify-content-center">
+        <div class="d-flex w-75 pt-4 flex-column">
+            <div class="text-center">
+                <h1 class="pb-2">My Dashboard</h1>
+                <div class="d-flex mt-3">
+                    <blockquote class="blockquote w-100">
+                        <p th:text="'Welcome ' + ${user.name}">Welcome </p></blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

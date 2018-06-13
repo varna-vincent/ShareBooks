@@ -25,22 +25,33 @@
     <div class="container d-flex p-3 justify-content-center">
         <div class="d-flex w-75 pt-4 flex-column">
             <div class="text-center">
-                <h1 class="pb-2">My Books</h1>
-                <div class="d-flex flex-column">
-                    <div class="media m-2" th:each="book : ${books}">
-                        <img class="mr-3 w-25 h-25 img-thumbnail" th:src="@{'data:image/jpeg;base64,' + ${book.image} }" alt="No image found">
-                        <div class="media-body">
-                            <h5 class="mt-0"  th:text="${book.name}"></h5>
-                            <h6 class="text-muted"><small  th:text="'Original Price: $' + ${book.originalPrice}"></small></h6>
-                            <h6 class="text-muted" th:text="'Rent: $' + ${book.rentalPrice}"></h6>
-                            <h6 class="text-muted" th:text="'Condition: ' + ${book.bookCondition}"></h6>
-                            <h6 class="text-muted" th:text="'Status: ' + ${book.status}"></h6>
-                            <h6 class="text-muted" th:if="${book.status} != 'Available'" th:text="'Borrowed From: ' + ${book.borrowedDateFrom}"></h6>
-                            <h6 class="text-muted" th:if="${book.status} != 'Available'" th:text="'Borrowed Till: ' + ${book.borrowedDateTo}"></h6>
-                            <h6 class="text-muted"><small class="text-muted"  th:text="'Notes: ' + ${book.notes}"></small></h6>
-                            <div><a th:href="@{'/books/' + ${book.id} + '/delete'}" class="btn btn-outline-primary btn-block">Delete</a></div>
+                <h1 class="pb-2">Payment Information</h1>
+                <div class="d-flex mt-3">
+                    <form method="POST" action="/payment/validate" class="w-100">
+                        <div class="form-group">
+                            <label for="cardNo">Card Number</label>
+                            <select class="form-control" id="cardNo" name="cardNo">
+                                <option value="378282246310005">378282246310005</option>
+                                <option value="6011111111111117">6011111111111117</option>
+                                <option value="5555555555554444">5555555555554444</option>
+                                <option value="4111111111111111">4111111111111111</option>
+                                <option value="4005519200000004">4005519200000004</option>
+                                <option value="4000111111111115">4000111111111115</option>
+                            </select>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="cardType">Card Type</label>
+                            <select class="form-control" id="cardType" name="cardType">
+                                <option value="American Express">American Express</option>
+                                <option value="Discover">Discover</option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="Visa">Visa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-outline-primary btn-block">Validate</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

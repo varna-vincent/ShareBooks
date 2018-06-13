@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +71,7 @@ public class BookController {
             e.printStackTrace();
         }
 
-        return "redirect:/explore";
+        return "redirect:/books/";
     }
 
     @RequestMapping(value="/borrow/{id}")
@@ -81,5 +83,13 @@ public class BookController {
         model.addAttribute("user", request.getSession().getAttribute("user"));
         System.out.println(book);
         return "borrow";
+    }
+
+    @RequestMapping(value="/{id}/delete")
+    public String deleteBook(@PathVariable("id") long id) {
+
+        Book book = ((Optional<Book>) bookRepository.findById(id)).get();
+        bookRepository.delete(book);
+        return "redirect:/books/mybooks";
     }
 }
