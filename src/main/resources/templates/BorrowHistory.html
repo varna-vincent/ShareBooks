@@ -27,15 +27,19 @@
             <div class="text-center">
                 <h1 class="pb-2">My Borrow History</h1>
                 <div class="d-flex flex-column">
-                    <div class="media" th:each="borrowTransaction : ${borrowTransactions}">
+                    <div class="media m-2" th:each="borrowTransaction : ${borrowTransactions}">
                         <img class="mr-3 w-25 h-25 img-thumbnail" th:src="@{'data:image/jpeg;base64,' + ${borrowTransaction.book.image} }" alt="No image found">
                         <div class="media-body">
                             <h5 class="mt-0"  th:text="${borrowTransaction.book.name}"></h5>
                             <h6 class="text-muted"><small  th:text="'Original Price: $' + ${borrowTransaction.book.originalPrice}"></small></h6>
                             <h6 class="text-muted" th:text="'Rent: $' + ${borrowTransaction.price}"></h6>
                             <h6 class="text-muted" th:text="'Owned By: ' + ${borrowTransaction.lender.name}"></h6>
-                            <h6 class="text-muted" th:text="'Borrowed On: ' + ${borrowTransaction.borrowedDateFrom}"></h6>
-                            <h6 class="text-muted" th:text="'Borrowed Till: ' + ${borrowTransaction.borrowedDateTo}"></h6>
+                            <h6 class="text-muted" th:text="'Borrowed On: ' + ${#calendars.format(borrowTransaction.borrowedDateFrom,'dd-MM-yyyy')}"></h6>
+                            <h6 class="text-muted" th:text="'Borrowed Till: ' + ${#calendars.format(borrowTransaction.borrowedDateTo,'dd-MM-yyyy')}"></h6>
+                            <form method="POST" action="/books/return">
+                                <input type="hidden" name="id" th:value="${borrowTransaction.book.id}"/>
+                                <div><button class="btn btn-outline-primary btn-block" th:if="${borrowTransaction.book.status} != 'Available'">Return</button></div>
+                            </form>
                         </div>
                     </div>
                 </div>

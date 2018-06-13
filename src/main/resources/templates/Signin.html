@@ -51,6 +51,7 @@
             <div class="text-left">
                 <h2 class="py-3">Login</h2>
                 <form id="signinForm" method="POST" action="/users/login">
+                    <div class="form-group invalid-feedback" th:if="${errormsg} != null" th:classappend="${errormsg} ?  d-block : ''" th:text="${errormsg}"></div>
                     <div class="form-group">
                         <label for="email"><b>Email: </b></label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="">

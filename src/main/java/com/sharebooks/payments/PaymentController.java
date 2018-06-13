@@ -38,30 +38,31 @@ public class PaymentController {
         String cutomerId = cresult.isSuccess() ? cresult.getTarget().getId() : null;
         System.out.println("cutomerId - " + cutomerId);
 
-        if(cutomerId != null) {
-            PaymentMethodRequest paymentRequest = new PaymentMethodRequest()
-                    .customerId("the_customer_id")
-                    .paymentMethodNonce("fake-valid-nonce")
-                    .options()
-                    .verifyCard(true)
-                    .verificationMerchantAccountId("2ghrdc725tmckv2q")
-                    .verificationAmount("1.00")
-                    .done();
+        PaymentMethodRequest paymentRequest = new PaymentMethodRequest()
+                .customerId("the_customer_id")
+                .paymentMethodNonce("fake-valid-visa-nonce")
+                .options()
+                .verifyCard(true)
+                .verificationMerchantAccountId("2ghrdc725tmckv2q")
+                .verificationAmount("1.00")
+                .done();
 
 
-            Result<? extends PaymentMethod> presult = BraintreeGatewayFactory.gateway.paymentMethod().create(paymentRequest);
-            System.out.println(presult.getMessage());
-            model.addAttribute("payment_response", presult.getMessage());
-            CreditCardVerification verification = presult.getCreditCardVerification();
-            if(verification != null) {
-                System.out.println("Verification Status - " + verification.getStatus());
-                // "PROCESSOR_DECLINED"
-                System.out.println("Verification Processor Response Code" + verification.getProcessorResponseCode());
-                System.out.println("Verification Processor Response Text" + verification.getProcessorResponseText());
-                model.addAttribute("verification_status", presult.isSuccess() ? verification.getStatus() : verification.getGatewayRejectionReason().toString());
-            }
+        Result<? extends PaymentMethod> presult = BraintreeGatewayFactory.gateway.paymentMethod().create(paymentRequest);
+        System.out.println(presult.getMessage());
+        model.addAttribute("payment_response", presult.getMessage());
+        model.addAttribute("payment_response_present", true);
+
+        CreditCardVerification verification = presult.getCreditCardVerification();
+        if(verification != null) {
+            System.out.println("Verification Status - " + verification.getStatus());
+            // "PROCESSOR_DECLINED"
+            System.out.println("Verification Processor Response Code" + verification.getProcessorResponseCode());
+            System.out.println("Verification Processor Response Text" + verification.getProcessorResponseText());
+            model.addAttribute("verification_status", presult.isSuccess() ? verification.getStatus() : verification.getGatewayRejectionReason().toString());
         }
+
         model.addAttribute("user", request.getSession().getAttribute("user"));
-        return cresult.isSuccess() ? "redirect:/dashboard" : "payment";
+        return presult.isSuccess() ? "redirect:/dashboard" : "payment";
     }
 }

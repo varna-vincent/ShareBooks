@@ -28,6 +28,7 @@
                 <h1 class="pb-2">Payment Information</h1>
                 <div class="d-flex mt-3">
                     <form method="POST" action="/payment/validate" class="w-100">
+                        <div class="form-group invalid-feedback" th:if="${payment_response} != null" th:classappend="${payment_response_present} ?  d-block : ''" th:text="${payment_response}"></div>
                         <div class="form-group">
                             <label for="cardNo">Card Number</label>
                             <select class="form-control" id="cardNo" name="cardNo">

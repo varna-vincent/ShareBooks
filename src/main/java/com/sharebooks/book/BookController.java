@@ -4,6 +4,7 @@ import com.sharebooks.user.User;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,5 +92,13 @@ public class BookController {
         Book book = ((Optional<Book>) bookRepository.findById(id)).get();
         bookRepository.delete(book);
         return "redirect:/books/mybooks";
+    }
+
+    @Transactional
+    @PostMapping(value="/return")
+    public String returnBook(@RequestParam("id") Long id) {
+        System.out.println("Returning book");
+        int result = bookRepository.setBorrowedDatesFor(null, null, "Available", id);
+        return result > 0 ? "redirect:/books/" : "redirect:/borrowhistory";
     }
 }

@@ -35,8 +35,8 @@
                             <h6 class="text-muted" th:text="'Rent: $' + ${book.rentalPrice}"></h6>
                             <h6 class="text-muted" th:text="'Condition: ' + ${book.bookCondition}"></h6>
                             <h6 class="text-muted" th:text="'Status: ' + ${book.status}"></h6>
-                            <h6 class="text-muted" th:if="${book.status} != 'Available'" th:text="'Borrowed From: ' + ${book.borrowedDateFrom}"></h6>
-                            <h6 class="text-muted" th:if="${book.status} != 'Available'" th:text="'Borrowed Till: ' + ${book.borrowedDateTo}"></h6>
+                            <h6 class="text-muted" th:if="${book.status} != 'Available'" th:text="'Borrowed From: ' + ${#calendars.format(book.borrowedDateFrom,'dd-MM-yyyy')}"></h6>
+                            <h6 class="text-muted" th:if="${book.status} != 'Available'" th:text="'Borrowed Till: ' + ${#calendars.format(book.borrowedDateTo,'dd-MM-yyyy')}"></h6>
                             <h6 class="text-muted"><small class="text-muted"  th:text="'Notes: ' + ${book.notes}"></small></h6>
                             <div><a th:href="@{'/books/' + ${book.id} + '/delete'}" class="btn btn-outline-primary btn-block">Delete</a></div>
                         </div>
